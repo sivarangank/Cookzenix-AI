@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Recipe - CookZenix AI</title>
+  <meta name="description" content="Share your favourite recipe with the CookZenix AI community." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Add Recipe Page Styles ── */
+    .add-recipe-page { padding-top: 90px; min-height: 100vh; background: var(--bg-darkest); }
+    .add-recipe-header { text-align: center; padding: var(--space-12) var(--space-4) var(--space-8); }
+    .add-recipe-header h1 { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-2); }
+    .add-recipe-header p { color: var(--text-secondary); font-size: 1.05rem; }
+
+    /* Step Indicator */
+    .step-indicator { display: flex; justify-content: center; align-items: center; gap: 0; margin: var(--space-8) auto; max-width: 500px; }
+    .step-ind { display: flex; align-items: center; gap: var(--space-2); }
+    .step-ind-circle { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--glass-border); background: var(--bg-card); color: var(--text-muted); font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+    .step-ind.active .step-ind-circle { border-color: var(--primary); background: var(--primary); color: white; box-shadow: 0 0 20px rgba(255,107,53,0.5); }
+    .step-ind.completed .step-ind-circle { border-color: var(--success); background: var(--success); color: white; }
+    .step-ind-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+    .step-ind.active .step-ind-label { color: var(--primary); }
+    .step-ind.completed .step-ind-label { color: var(--success); }
+    .step-connector { width: 60px; height: 2px; background: var(--glass-border); margin: 0 var(--space-2); flex-shrink: 0; transition: background 0.3s; }
+    .step-connector.done { background: var(--success); }
+
+    /* Form Container */
+    .add-recipe-container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-4) var(--space-16); }
+    .step-panel { display: none; animation: fadeIn 0.4s ease; }
+    .step-panel.active { display: block; }
+    .form-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: var(--space-10); margin-bottom: var(--space-6); }
+    .form-card-title { font-family: var(--font-heading); font-size: 1.4rem; color: var(--text-primary); margin-bottom: var(--space-6); display: flex; align-items: center; gap: var(--space-3); }
+    .form-card-title span { font-size: 1.5rem; }
+    .form-group { margin-bottom: var(--space-5); }
+    .form-label { display: block; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; margin-bottom: var(--space-2); letter-spacing: 0.03em; }
+    .form-label .required { color: var(--primary); margin-left: 2px; }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--glass-border); border-radius: var(--radius-md);
+      color: var(--text-primary); font-family: var(--font-body); font-size: 0.95rem;
+      transition: all 0.3s ease; outline: none;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255,107,53,0.15); background: rgba(255,107,53,0.04); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
+    .form-select option { background: var(--bg-card); color: var(--text-primary); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* Image Preview */
+    .image-preview-box { display: none; margin-top: var(--space-3); border-radius: var(--radius-md); overflow: hidden; border: 1.5px solid var(--glass-border); max-height: 200px; }
+    .image-preview-box img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .image-preview-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: var(--space-2); }
+
+    /* Dynamic rows */
+    .dynamic-row { display: flex; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-3); animation: slideUp 0.3s ease; }
+    .dynamic-row .form-input, .dynamic-row .form-textarea { flex: 1; }
+    .step-num-badge { width: 32px; height: 32px; border-radius: 50%; background: var(--gradient-primary); color: white; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 14px; }
+    .btn-remove { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3); color: var(--error); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; margin-top: 14px; }
+    .btn-remove:hover { background: rgba(255,68,68,0.25); transform: scale(1.1); }
+    .add-row-btn { display: flex; align-items: center; gap: var(--space-2); color: var(--primary); background: rgba(255,107,53,0.08); border: 1.5px dashed rgba(255,107,53,0.4); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; width: 100%; justify-content: center; margin-top: var(--space-2); }
+    .add-row-btn:hover { background: rgba(255,107,53,0.15); border-color: var(--primary); }
+
+    /* Difficulty Radio */
+    .difficulty-group { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .difficulty-radio { display: none; }
+    .difficulty-label { padding: var(--space-3) var(--space-5); border-radius: var(--radius-full); border: 1.5px solid var(--glass-border); color: var(--text-secondary); cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+    .difficulty-radio:checked + .difficulty-label { border-color: var(--primary); background: rgba(255,107,53,0.12); color: var(--primary); box-shadow: 0 0 12px rgba(255,107,53,0.25); }
+    #diff-easy:checked + .difficulty-label { border-color: var(--success); background: rgba(76,175,80,0.12); color: var(--success); box-shadow: 0 0 12px rgba(76,175,80,0.25); }
+    #diff-hard:checked + .difficulty-label { border-color: var(--error); background: rgba(255,68,68,0.12); color: var(--error); box-shadow: 0 0 12px rgba(255,68,68,0.25); }
+
+    /* Nutrition Grid */
+    .nutrition-inputs { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--space-4); }
+    .nutrition-field label { font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: var(--space-1); font-weight: 600; }
+    .nutrition-field input { padding: 10px 12px; font-size: 0.9rem; }
+    .optional-badge { font-size: 0.72rem; background: rgba(255,255,255,0.07); color: var(--text-muted); padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
+
+    /* Navigation buttons */
+    .step-nav { display: flex; justify-content: space-between; margin-top: var(--space-6); gap: var(--space-3); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 12px 28px; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.3s ease; text-decoration: none; }
+    .btn-primary { background: var(--gradient-primary); color: white; box-shadow: 0 4px 20px rgba(255,107,53,0.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,53,0.5); }
+    .btn-ghost { background: transparent; color: var(--text-secondary); border: 1.5px solid var(--glass-border); }
+    .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+    .btn-lg { padding: 16px 40px; font-size: 1.05rem; }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Input error */
+    .input-error { border-color: var(--error) !important; box-shadow: 0 0 0 3px rgba(255,68,68,0.15) !important; }
+    .field-error { color: var(--error); font-size: 0.8rem; margin-top: var(--space-1); display: block; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <span class="logo-icon">🍴</span>
+        <span class="logo-text">CookZenix <em>AI</em></span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="recipes.html" class="nav-link">Recipes</a></li>
+        <li><a href="recipes.html" class="nav-link">Categories</a></li>
+        <li><a href="add-recipe.html" class="nav-link active" id="add-recipe-link">Add Recipe</a></li>
+      </ul>
+      <div class="nav-auth" id="auth-nav">
+        <a href="signin.html" class="btn btn-signin" id="nav-signin">Sign In</a>
+        <a href="signup.html" class="btn btn-signup" id="nav-signup">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page -->
+  <main class="add-recipe-page">
+    <div class="add-recipe-header">
+      <h1 class="add-recipe-heading">Share Your Recipe</h1>
+      <p>Share your culinary masterpiece with our community of food lovers</p>
+    </div>
+
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      <div class="step-ind active" id="step-indicator-1">
+        <div class="step-ind-circle">1</div>
+        <span class="step-ind-label">Basic Info</span>
+      </div>
+      <div class="step-connector" id="connector-1"></div>
+      <div class="step-ind" id="step-indicator-2">
+        <div class="step-ind-circle">2</div>
+        <span class="step-ind-label">Ingredients & Steps</span>
+      </div>
+      <div class="step-connector" id="connector-2"></div>
+      <div class="step-ind" id="step-indicator-3">
+        <div class="step-ind-circle">3</div>
+        <span class="step-ind-label">Details</span>
+      </div>
+    </div>
+
+    <div class="add-recipe-container">
+
+      <!-- STEP 1: Basic Info -->
+      <div class="step-panel active" id="step-1">
+        <div class="form-card">
+          <div class="form-card-title"><span>📝</span> Basic Information</div>
+
+          <div class="form-group">
+            <label class="form-label" for="recipe-title">Recipe Title <span class="required">*</span></label>
+            <input type="text" id="recipe-title" class="form-input" placeholder="e.g. Grandma's Chicken Biryani" maxlength="100" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="recipe-description">Description <span class="required">*</span></label>
+            <textarea id="recipe-description" class="form-textarea" rows="3" placeholder="Describe your recipe in a few sentences — what makes it special?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="recipe-image">Recipe Image URL</label>
+            <input type="url" id="recipe-image" class="form-input" placeholder="https://images.unsplash.com/..." />
+            <p class="image-preview-hint">💡 Paste any image URL — from Unsplash, your blog, etc.</p>
+            <div class="image-preview-box" id="image-preview">
+              <img id="preview-img" src="" alt="Recipe preview" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="recipe-category">Category <span class="required">*</span></label>
+              <select id="recipe-category" class="form-select">
+                <option value="">Select category...</option>
+                <option>Curry</option>
+                <option>Breakfast</option>
+                <option>Rice</option>
+                <option>Snacks</option>
+                <option>Desserts</option>
+                <option>Soups</option>
+                <option>Seafood</option>
+                <option>Main Course</option>
+                <option>Pasta</option>
+                <option>Pizza</option>
+                <option>Salads</option>
+                <option>Burgers</option>
+                <option>Noodles</option>
+                <option>Breads</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="recipe-cuisine">Cuisine</label>
+              <select id="recipe-cuisine" class="form-select">
+                <option value="">Select cuisine...</option>
+                <option>South Indian</option>
+                <option>Indian</option>
+                <option>Italian</option>
+                <option>Mexican</option>
+                <option>American</option>
+                <option>Japanese</option>
+                <option>Thai</option>
+                <option>Chinese</option>
+                <option>Greek</option>
+                <option>French</option>
+                <option>Middle Eastern</option>
+                <option>Mediterranean</option>
+                <option>Korean</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <span></span>
+          <button class="btn btn-primary" id="next-step-1">Next: Ingredients &amp; Steps <i class="fa fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Ingredients & Steps -->
+      <div class="step-panel" id="step-2">
+        <div class="form-card">
+          <div class="form-card-title"><span>🥕</span> Ingredients</div>
+          <div id="ingredients-container"></div>
+          <button type="button" class="add-row-btn" id="add-ingredient">
+            <i class="fa fa-plus"></i> Add Ingredient
+          </button>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title"><span>👨‍🍳</span> Instructions</div>
+          <div id="steps-container"></div>
+          <button type="button" class="add-row-btn" id="add-step">
+            <i class="fa fa-plus"></i> Add Step
+          </button>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn btn-ghost" id="prev-step-2"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn btn-primary" id="next-step-2">Next: Details <i class="fa fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Details & Nutrition -->
+      <div class="step-panel" id="step-3">
+        <div class="form-card">
+          <div class="form-card-title"><span>⏱️</span> Cooking Details</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="prep-time">Prep Time (minutes)</label>
+              <input type="number" id="prep-time" class="form-input" value="15" min="0" max="1440" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cook-time">Cook Time (minutes)</label>
+              <input type="number" id="cook-time" class="form-input" value="30" min="0" max="1440" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="servings">Servings</label>
+            <input type="number" id="servings" class="form-input" value="4" min="1" max="100" style="max-width:200px" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Difficulty Level</label>
+            <div class="difficulty-group">
+              <input type="radio" name="difficulty" id="diff-easy" value="Easy" class="difficulty-radio" />
+              <label for="diff-easy" class="difficulty-label">😊 Easy</label>
+              <input type="radio" name="difficulty" id="diff-medium" value="Medium" class="difficulty-radio" checked />
+              <label for="diff-medium" class="difficulty-label">🔥 Medium</label>
+              <input type="radio" name="difficulty" id="diff-hard" value="Hard" class="difficulty-radio" />
+              <label for="diff-hard" class="difficulty-label">💪 Hard</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="recipe-tags">Tags <span class="optional-badge">optional</span></label>
+            <input type="text" id="recipe-tags" class="form-input" placeholder="italian, pasta, creamy, quick (comma separated)" />
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title"><span>💪</span> Nutrition Info <span class="optional-badge">optional</span></div>
+          <div class="nutrition-inputs">
+            <div class="nutrition-field">
+              <label for="nutrition-calories">🔥 Calories (kcal)</label>
+              <input type="number" id="nutrition-calories" class="form-input" placeholder="e.g. 520" min="0" />
+            </div>
+            <div class="nutrition-field">
+              <label for="nutrition-protein">💪 Protein (g)</label>
+              <input type="number" id="nutrition-protein" class="form-input" placeholder="e.g. 25" min="0" />
+            </div>
+            <div class="nutrition-field">
+              <label for="nutrition-carbs">🌾 Carbs (g)</label>
+              <input type="number" id="nutrition-carbs" class="form-input" placeholder="e.g. 65" min="0" />
+            </div>
+            <div class="nutrition-field">
+              <label for="nutrition-fat">🥑 Fat (g)</label>
+              <input type="number" id="nutrition-fat" class="form-input" placeholder="e.g. 18" min="0" />
+            </div>
+            <div class="nutrition-field">
+              <label for="nutrition-fiber">🥦 Fiber (g)</label>
+              <input type="number" id="nutrition-fiber" class="form-input" placeholder="e.g. 4" min="0" />
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn btn-ghost" id="prev-step-3"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn btn-primary btn-lg" id="submit-recipe">
+            <i class="fa fa-paper-plane"></i> Publish Recipe
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FoodieBot Chatbot Widget -->
+  <div class="chatbot-widget" id="chatbot-widget">
+    <div class="chatbot-panel" id="chatbot-panel">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <span class="chatbot-avatar">🤖</span>
+          <div>
+            <h4>FoodieBot</h4>
+            <span class="status-dot"></span><span class="status-text">Always ready to cook!</span>
+          </div>
+        </div>
+        <button class="chatbot-close" id="chatbot-close">✕</button>
+      </div>
+      <div class="chatbot-messages" id="chatbot-messages"></div>
+      <div class="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything about food..." />
+        <button id="chatbot-send">➤</button>
+      </div>
+    </div>
+    <button class="chatbot-toggle" id="chatbot-toggle" title="Chat with FoodieBot">🍴</button>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/add-recipe.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

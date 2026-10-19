@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - CookZenix AI</title>
+  <meta name="description" content="Create your free CookZenix AI account. Save recipes, build custom meal plans, and cook like a professional with AI assistance.">
+  <meta name="keywords" content="sign up, register, CookZenix AI, create account, food community">
+  <meta name="author" content="CookZenix AI">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+
+  <!-- Google Fonts Import: Playfair Display and Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Primary Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Fallback relative reference: ../css/style.css and ../js/main.js -->
+  <link rel="alternate stylesheet" href="../css/style.css" title="alternate-css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" id="nav-logo" aria-label="CookZenix AI Homepage">
+          <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+          <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="nav-toggle" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="nav-menu">
+          <a href="index.html" class="nav-link" id="nav-home">
+            <i class="fa-solid fa-house"></i> Home
+          </a>
+          <a href="recipes.html" class="nav-link" id="nav-recipes">
+            <i class="fa-solid fa-book-open"></i> Recipes
+          </a>
+          <a href="index.html#categories-section" class="nav-link" id="nav-categories">
+            <i class="fa-solid fa-layer-group"></i> Categories
+          </a>
+          <a href="add-recipe.html" class="nav-link" id="add-recipe-link" style="display: none;">
+            <i class="fa-solid fa-circle-plus"></i> Add Recipe
+          </a>
+
+          <!-- Auth Actions -->
+          <div class="nav-actions auth-nav" id="auth-nav">
+            <a href="signin.html" class="btn-signin" id="nav-signin-btn">Sign In</a>
+            <a href="signup.html" class="btn-signup active" id="nav-signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Full-page Split Auth Layout -->
+    <div class="auth-page" id="signup-page">
+      <!-- Floating food particles background -->
+      <div class="hero-particles" aria-hidden="true">
+        <div class="food-particle" style="top: 12%; left: 7%; font-size: 2.8rem;">🍕</div>
+        <div class="food-particle" style="top: 22%; left: 88%; font-size: 3rem;">🍜</div>
+        <div class="food-particle" style="top: 58%; left: 5%; font-size: 2.6rem;">🍣</div>
+        <div class="food-particle" style="top: 68%; left: 90%; font-size: 3.2rem;">🌮</div>
+        <div class="food-particle" style="top: 35%; left: 15%; font-size: 2.2rem;">🍰</div>
+        <div class="food-particle" style="top: 78%; left: 18%; font-size: 2.7rem;">🍔</div>
+        <div class="food-particle" style="top: 14%; left: 52%; font-size: 2.4rem;">🥐</div>
+      </div>
+
+      <!-- Split Container -->
+      <div class="auth-split-layout" style="display: flex; width: 100%; max-width: 1080px; min-height: 640px; background: var(--bg-card); border: 1px solid var(--glass-border-light); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-xl); position: relative; z-index: 10;">
+        
+        <!-- Left Side: Decorative Food Image Panel -->
+        <div class="auth-decorative-panel" style="flex: 1; min-width: 320px; background: linear-gradient(135deg, rgba(78,205,196,0.85) 0%, rgba(26,26,46,0.94) 100%), url('https://images.unsplash.com/photo-1543353071-873f17a7a088?w=1200&auto=format&fit=crop') center/cover no-repeat; padding: var(--space-12) var(--space-8); display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 80% 20%, rgba(255,107,53,0.25) 0%, transparent 60%); pointer-events: none;"></div>
+
+          <!-- Brand Badge -->
+          <div style="position: relative; z-index: 2;">
+            <div class="hero-badge" style="background: rgba(10,10,15,0.4);">
+              <span class="hero-badge-dot" style="background: var(--secondary);"></span>
+              <span class="hero-badge-text" style="color: var(--text-primary);">Join 10,000+ Cooks</span>
+            </div>
+          </div>
+
+          <!-- Decorative Large Typography -->
+          <div style="position: relative; z-index: 2; margin: auto 0;">
+            <h1 style="font-family: var(--font-heading); font-size: clamp(2.2rem, 3.5vw, 3rem); font-weight: var(--fw-black); color: #FFFFFF; line-height: 1.15; margin-bottom: var(--space-4); text-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+              Start Your<br><span style="color: var(--accent);">Culinary Journey</span>
+            </h1>
+            <p style="font-size: var(--fs-md); color: rgba(255,255,255,0.9); line-height: var(--lh-relaxed); max-width: 380px;">
+              Unlock smart AI substitutions, save your cherished family dishes, and connect with passionate home chefs worldwide.
+            </p>
+          </div>
+
+          <!-- Feature Highlights Box -->
+          <div style="position: relative; z-index: 2; background: rgba(10,10,15,0.55); backdrop-filter: var(--glass-blur-sm); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5);">
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <div style="display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-xs); color: #FFFFFF;">
+                <span style="color: var(--secondary);">✔</span> AI-guided step-by-step instructions
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-xs); color: #FFFFFF;">
+                <span style="color: var(--secondary);">✔</span> Bookmark unlimited recipes & create collections
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-xs); color: #FFFFFF;">
+                <span style="color: var(--secondary);">✔</span> Publish recipes and earn chef badges
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Auth Card -->
+        <div class="auth-card-panel" style="flex: 1; min-width: 340px; padding: var(--space-8) var(--space-8); display: flex; flex-direction: column; justify-content: center; background: rgba(22,22,36,0.94); backdrop-filter: var(--glass-blur-lg);">
+          
+          <!-- Logo at Top -->
+          <div class="auth-header" style="margin-bottom: var(--space-5);">
+            <a href="index.html" class="nav-logo" style="justify-content: center; margin-bottom: var(--space-2);">
+              <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+              <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+            </a>
+            <h2 class="auth-title">Create Account</h2>
+            <p class="auth-subtitle">Join the CookZenix AI cooking community</p>
+          </div>
+
+          <!-- Sign Up Form -->
+          <form id="signup-form" novalidate>
+            <!-- Username Input with Live Availability Indicator -->
+            <div class="form-group" style="margin-bottom: var(--space-3);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <label for="signup-username" class="form-label" style="font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0;">
+                  <i class="fa-solid fa-user" style="margin-right: 6px; color: var(--primary);"></i> Username
+                </label>
+                <span id="username-indicator" style="font-size: 11px; color: var(--text-muted);">Minimum 3 characters</span>
+              </div>
+              <input 
+                type="text" 
+                id="signup-username" 
+                class="form-input" 
+                placeholder="chef_ramsay" 
+                required 
+                minlength="3"
+                autocomplete="username"
+                style="width: 100%; background: var(--bg-dark); border: 1.5px solid var(--glass-border); border-radius: var(--radius-md); padding: 10px 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none;"
+              >
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group" style="margin-bottom: var(--space-3);">
+              <label for="signup-email" class="form-label" style="display: block; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">
+                <i class="fa-solid fa-envelope" style="margin-right: 6px; color: var(--primary);"></i> Email Address
+              </label>
+              <input 
+                type="email" 
+                id="signup-email" 
+                class="form-input" 
+                placeholder="chef@example.com" 
+                required 
+                autocomplete="email"
+                style="width: 100%; background: var(--bg-dark); border: 1.5px solid var(--glass-border); border-radius: var(--radius-md); padding: 10px 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none;"
+              >
+            </div>
+
+            <!-- Password Input with Strength Indicator -->
+            <div class="form-group" style="margin-bottom: var(--space-3);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <label for="signup-password" class="form-label" style="font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0;">
+                  <i class="fa-solid fa-lock" style="margin-right: 6px; color: var(--primary);"></i> Password
+                </label>
+                <span id="strength-label" style="font-size: 11px; font-weight: var(--fw-bold); color: var(--text-muted);"></span>
+              </div>
+              <div style="position: relative;">
+                <input 
+                  type="password" 
+                  id="signup-password" 
+                  class="form-input" 
+                  placeholder="At least 6 characters" 
+                  required 
+                  minlength="6"
+                  autocomplete="new-password"
+                  style="width: 100%; background: var(--bg-dark); border: 1.5px solid var(--glass-border); border-radius: var(--radius-md); padding: 10px 42px 10px 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none;"
+                >
+                <button type="button" class="toggle-password" data-target="signup-password" aria-label="Toggle password visibility" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted); padding: 2px;">
+                  👁️
+                </button>
+              </div>
+
+              <!-- Password Strength Meter Bar -->
+              <div class="strength-meter" style="width: 100%; height: 5px; background: rgba(255,255,255,0.08); border-radius: var(--radius-full); margin-top: 6px; overflow: hidden;">
+                <div class="strength-bar" id="strength-bar" style="width: 0%; height: 100%; transition: width 0.3s ease, background 0.3s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="signup-confirm" class="form-label" style="display: block; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">
+                <i class="fa-solid fa-shield-check" style="margin-right: 6px; color: var(--primary);"></i> Confirm Password
+              </label>
+              <div style="position: relative;">
+                <input 
+                  type="password" 
+                  id="signup-confirm" 
+                  class="form-input" 
+                  placeholder="Re-enter your password" 
+                  required 
+                  autocomplete="new-password"
+                  style="width: 100%; background: var(--bg-dark); border: 1.5px solid var(--glass-border); border-radius: var(--radius-md); padding: 10px 42px 10px 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none;"
+                >
+                <button type="button" class="toggle-password" data-target="signup-confirm" aria-label="Toggle password visibility" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted); padding: 2px;">
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <!-- Terms Checkbox -->
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label class="form-checkbox-label" for="terms-checkbox" style="display: flex; align-items: center; gap: var(--space-2); cursor: pointer; font-size: var(--fs-xs); color: var(--text-secondary);">
+                <input type="checkbox" id="terms-checkbox" class="form-checkbox" required style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+                <span>I agree to the <a href="#" style="color: var(--primary); font-weight: var(--fw-bold);">Terms of Service</a> & <a href="#" style="color: var(--primary); font-weight: var(--fw-bold);">Privacy Policy</a></span>
+              </label>
+            </div>
+
+            <!-- Submit Button with Spinner -->
+            <button type="submit" class="btn btn-primary btn-md" id="signup-btn" style="width: 100%; padding: 13px; font-size: var(--fs-md); font-weight: var(--fw-black);">
+              Create Account
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider" style="margin: var(--space-4) 0;">
+            <span>or sign up with</span>
+          </div>
+
+          <!-- Social Buttons -->
+          <div class="auth-social-buttons" style="margin-bottom: var(--space-3);">
+            <button type="button" class="btn-social" id="google-btn">
+              <i class="fa-brands fa-google" style="color: #EA4335;"></i> Google
+            </button>
+            <button type="button" class="btn-social" id="github-btn">
+              <i class="fa-brands fa-github"></i> GitHub
+            </button>
+          </div>
+
+          <!-- Sign In Toggle Link -->
+          <p class="text-center" style="font-size: var(--fs-sm); color: var(--text-secondary); margin-top: var(--space-3);">
+            Already have an account? 
+            <a href="signin.html" id="to-signin-link" style="color: var(--primary); font-weight: var(--fw-bold);">Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FoodieBot Chatbot Widget -->
+  <div class='chatbot-widget' id='chatbot-widget'>
+    <div class='chatbot-panel' id='chatbot-panel'>
+      <div class='chatbot-header'>
+        <div class='chatbot-header-info'>
+          <span class='chatbot-avatar'>🤖</span>
+          <div>
+            <h4>FoodieBot</h4>
+            <span class='status-dot'></span><span class='status-text'>Always ready to cook!</span>
+          </div>
+        </div>
+        <button class='chatbot-close' id='chatbot-close'>✕</button>
+      </div>
+      <div class='chatbot-messages' id='chatbot-messages'>
+        <!-- Welcome message injected by JS -->
+      </div>
+      <div class='chatbot-input-area'>
+        <input type='text' id='chatbot-input' placeholder='Ask me anything about food...' />
+        <button id='chatbot-send'>➤</button>
+      </div>
+    </div>
+    <button class='chatbot-toggle' id='chatbot-toggle' title='Chat with FoodieBot'>🍴</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src='js/main.js' data-alt='../js/main.js'></script>
+  <script src='js/auth.js'></script>
+  <script src='js/chatbot.js'></script>
+</body>
+</html>

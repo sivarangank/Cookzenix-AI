@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Recipes - CookZenix AI</title>
+  <meta name="description" content="Explore hundreds of mouth-watering recipes across 50+ cuisines on CookZenix AI. Filter by category, cuisine, prep time, and difficulty level.">
+  <meta name="keywords" content="browse recipes, culinary database, Italian, Indian, Mexican, Japanese, easy recipes, dinner ideas">
+  <meta name="author" content="CookZenix AI">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+
+  <!-- Google Fonts Import: Playfair Display and Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Primary Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Fallback relative reference: ../css/style.css and ../js/main.js -->
+  <link rel="alternate stylesheet" href="../css/style.css" title="alternate-css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" id="nav-logo" aria-label="CookZenix AI Homepage">
+          <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+          <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="nav-toggle" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="nav-menu">
+          <a href="index.html" class="nav-link" id="nav-home">
+            <i class="fa-solid fa-house"></i> Home
+          </a>
+          <a href="recipes.html" class="nav-link active" id="nav-recipes">
+            <i class="fa-solid fa-book-open"></i> Recipes
+          </a>
+          <a href="index.html#categories-section" class="nav-link" id="nav-categories">
+            <i class="fa-solid fa-layer-group"></i> Categories
+          </a>
+          <a href="index.html#cuisines-section" class="nav-link" id="nav-cuisines">
+            <i class="fa-solid fa-globe"></i> Cuisines
+          </a>
+          <a href="add-recipe.html" class="nav-link" id="add-recipe-link">
+            <i class="fa-solid fa-circle-plus"></i> Add Recipe
+          </a>
+
+          <!-- Auth Actions -->
+          <div class="nav-actions auth-nav" id="auth-nav">
+            <a href="signin.html" class="btn-signin" id="nav-signin-btn">Sign In</a>
+            <a href="signup.html" class="btn-signup" id="nav-signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main style="padding-top: 110px; padding-bottom: var(--space-20);">
+    <div class="container">
+      
+      <!-- Page Header Section -->
+      <section class="page-header" style="text-align: center; margin-bottom: var(--space-10);">
+        <span class="section-badge">Culinary Catalog</span>
+        <h1 class="section-title" style="font-size: clamp(2.2rem, 4.5vw, 3.2rem);">Discover Recipes</h1>
+        <p class="section-subtitle">
+          From quick 15-minute weeknight dinners to gourmet weekend centerpieces, filter through our entire library of community and AI recipes.
+        </p>
+      </section>
+
+      <!-- Filter & Search Bar -->
+      <section class="filter-bar" id="filter-bar">
+        <!-- Top Row: Search Input + Select Dropdowns -->
+        <div class="filter-bar-top">
+          <!-- Search Input -->
+          <div class="filter-search-wrap">
+            <i class="fa-solid fa-magnifying-glass filter-search-icon"></i>
+            <input 
+              type="text" 
+              id="recipe-search" 
+              class="filter-search-input" 
+              placeholder="Search recipes, cuisines, ingredients..." 
+              autocomplete="off"
+            >
+          </div>
+
+          <!-- Dropdown Selects -->
+          <div class="filter-selects">
+            <!-- Sort Dropdown -->
+            <select id="sort-select" class="filter-select" aria-label="Sort recipes by">
+              <option value="newest">🕒 Newest First</option>
+              <option value="popular">🔥 Most Popular</option>
+              <option value="rating">⭐ Highest Rated</option>
+            </select>
+
+            <!-- Cuisine Filter Dropdown -->
+            <select id="cuisine-filter" class="filter-select" aria-label="Filter recipes by cuisine">
+              <option value="All">🌍 All Cuisines</option>
+              <option value="Indian">🍛 Indian (All)</option>
+              <option value="South Indian">🌴 South Indian</option>
+              <option value="Italian">🍝 Italian</option>
+              <option value="American">🍔 American</option>
+              <option value="Japanese">🍱 Japanese</option>
+              <option value="Thai">🍲 Thai</option>
+              <option value="Mexican">🌮 Mexican</option>
+              <option value="Greek">🥗 Greek</option>
+              <option value="French">🥐 French</option>
+              <option value="Middle Eastern">🧆 Middle Eastern</option>
+            </select>
+
+            <!-- Difficulty Filter Dropdown -->
+            <select id="difficulty-filter" class="filter-select" aria-label="Filter recipes by difficulty">
+              <option value="All">📊 All Difficulties</option>
+              <option value="Easy">🟢 Easy</option>
+              <option value="Medium">🟡 Medium</option>
+              <option value="Hard">🔴 Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Filter Chips: Separated by Category & Cuisine -->
+        <div class="filter-groups-wrapper" style="margin-top: var(--space-4);">
+          <!-- 1. Meal Category Chips -->
+          <div class="filter-group">
+            <div class="filter-group-header" style="display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="filter-group-title" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-utensils"></i> Meal Category
+              </span>
+            </div>
+            <div class="filter-chips category-chips" id="category-chips-row" role="tablist" aria-label="Meal categories">
+              <button type="button" class="filter-chip category-chip active" data-category="All" role="tab">All Categories</button>
+              <button type="button" class="filter-chip category-chip" data-category="Curry" role="tab">🍛 Curry</button>
+              <button type="button" class="filter-chip category-chip" data-category="Breakfast" role="tab">🍳 Breakfast</button>
+              <button type="button" class="filter-chip category-chip" data-category="Rice" role="tab">🍚 Rice</button>
+              <button type="button" class="filter-chip category-chip" data-category="Snacks" role="tab">🥟 Snacks</button>
+              <button type="button" class="filter-chip category-chip" data-category="Desserts" role="tab">🍰 Desserts</button>
+              <button type="button" class="filter-chip category-chip" data-category="Soup" role="tab">🥣 Soups &amp; Rasam</button>
+              <button type="button" class="filter-chip category-chip" data-category="Seafood" role="tab">🦐 Seafood</button>
+              <button type="button" class="filter-chip category-chip" data-category="Main Course" role="tab">🍽️ Main Course</button>
+              <button type="button" class="filter-chip category-chip" data-category="Pasta" role="tab">🍝 Pasta</button>
+              <button type="button" class="filter-chip category-chip" data-category="Pizza" role="tab">🍕 Pizza</button>
+              <button type="button" class="filter-chip category-chip" data-category="Salads" role="tab">🥗 Salads</button>
+              <button type="button" class="filter-chip category-chip" data-category="Burgers" role="tab">🍔 Burgers</button>
+              <button type="button" class="filter-chip category-chip" data-category="Noodles" role="tab">🍜 Noodles</button>
+            </div>
+          </div>
+
+          <!-- 2. Regional Cuisine Chips -->
+          <div class="filter-group" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
+            <div class="filter-group-header" style="display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="filter-group-title" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-globe"></i> Regional Cuisine
+              </span>
+            </div>
+            <div class="filter-chips cuisine-chips" id="cuisine-chips-row" role="tablist" aria-label="Regional cuisines">
+              <button type="button" class="filter-chip cuisine-chip active" data-cuisine="All" role="tab">🌍 All Cuisines</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="South Indian" role="tab">🌴 South Indian</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Indian" role="tab">🍛 Indian (All)</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Italian" role="tab">🍝 Italian</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Mexican" role="tab">🌮 Mexican</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="American" role="tab">🍔 American</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Japanese" role="tab">🍱 Japanese</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Thai" role="tab">🍲 Thai</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="French" role="tab">🥐 French</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Greek" role="tab">🥗 Greek</button>
+              <button type="button" class="filter-chip cuisine-chip" data-cuisine="Middle Eastern" role="tab">🧆 Middle Eastern</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results Count Info -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+        <span id="results-count" style="font-size: var(--fs-sm); font-weight: var(--fw-bold); color: var(--text-secondary);">
+          Loading recipes...
+        </span>
+      </div>
+
+      <!-- Recipe Grid (Populated by recipes.js) -->
+      <div id="recipes-grid" class="recipes-grid">
+        <!-- Recipe cards rendered dynamically -->
+      </div>
+
+      <!-- Pagination Container (Rendered by recipes.js) -->
+      <div id="pagination" class="pagination-container" style="display: flex; justify-content: center; align-items: center; gap: var(--space-2); margin-top: var(--space-12);">
+        <!-- Pagination buttons inserted by JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" id="footer-logo">
+            <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+            <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+          </a>
+          <p>Cook with Confidence, Eat with Joy — Empowering cooks worldwide with intelligent culinary exploration.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="recipes.html" class="footer-link">Browse Recipes</a></li>
+            <li><a href="index.html#categories-section" class="footer-link">Categories</a></li>
+            <li><a href="add-recipe.html" class="footer-link">Add Recipe</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Explore Cuisines</h4>
+          <ul class="footer-links">
+            <li><a href="recipes.html?category=Pasta" class="footer-link">Italian Classics</a></li>
+            <li><a href="recipes.html?category=Curry" class="footer-link">Indian Curries</a></li>
+            <li><a href="recipes.html?category=Mexican" class="footer-link">Mexican Fiesta</a></li>
+            <li><a href="recipes.html?category=Sushi" class="footer-link">Japanese Delights</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="signin.html" class="footer-link">Sign In</a></li>
+            <li><a href="signup.html" class="footer-link">Join Free</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CookZenix AI. All rights reserved.</p>
+        <div class="footer-social-links">
+          <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FoodieBot Chatbot Widget -->
+  <div class='chatbot-widget' id='chatbot-widget'>
+    <div class='chatbot-panel' id='chatbot-panel'>
+      <div class='chatbot-header'>
+        <div class='chatbot-header-info'>
+          <span class='chatbot-avatar'>🤖</span>
+          <div>
+            <h4>FoodieBot</h4>
+            <span class='status-dot'></span><span class='status-text'>Always ready to cook!</span>
+          </div>
+        </div>
+        <button class='chatbot-close' id='chatbot-close'>✕</button>
+      </div>
+      <div class='chatbot-messages' id='chatbot-messages'>
+        <!-- Welcome message injected by JS -->
+      </div>
+      <div class='chatbot-input-area'>
+        <input type='text' id='chatbot-input' placeholder='Ask me anything about food...' />
+        <button id='chatbot-send'>➤</button>
+      </div>
+    </div>
+    <button class='chatbot-toggle' id='chatbot-toggle' title='Chat with FoodieBot'>🍴</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src='js/main.js' data-alt='../js/main.js'></script>
+  <script src='js/recipes.js'></script>
+  <script src='js/chatbot.js'></script>
+</body>
+</html>

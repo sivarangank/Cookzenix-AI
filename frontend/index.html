@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookZenix AI - Discover Amazing Recipes</title>
+  <meta name="description" content="Discover, cook, and share amazing recipes from around the world with CookZenix AI. AI-powered recipe discovery, smart cooking assistance, and vibrant culinary community.">
+  <meta name="keywords" content="recipes, cooking, AI chef, food, meal ideas, pasta, pizza, curry, desserts, kitchen guide">
+  <meta name="author" content="CookZenix AI">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="CookZenix AI - Discover Amazing Recipes">
+  <meta property="og:description" content="Discover, cook, and share amazing recipes from around the world with CookZenix AI.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+
+  <!-- Google Fonts Import: Playfair Display and Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Primary Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Fallback relative reference: ../css/style.css and ../js/main.js -->
+  <link rel="alternate stylesheet" href="../css/style.css" title="alternate-css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" id="nav-logo" aria-label="CookZenix AI Homepage">
+          <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+          <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="nav-toggle" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="nav-menu">
+          <a href="index.html" class="nav-link active" id="nav-home">
+            <i class="fa-solid fa-house"></i> Home
+          </a>
+          <a href="recipes.html" class="nav-link" id="nav-recipes">
+            <i class="fa-solid fa-book-open"></i> Recipes
+          </a>
+          <a href="#categories-section" class="nav-link" id="nav-categories">
+            <i class="fa-solid fa-layer-group"></i> Categories
+          </a>
+          <a href="#cuisines-section" class="nav-link" id="nav-cuisines">
+            <i class="fa-solid fa-globe"></i> Cuisines
+          </a>
+          <a href="add-recipe.html" class="nav-link" id="add-recipe-link">
+            <i class="fa-solid fa-circle-plus"></i> Add Recipe
+          </a>
+
+          <!-- Auth Actions (Updated dynamically by main.js) -->
+          <div class="nav-actions auth-nav" id="auth-nav">
+            <a href="signin.html" class="btn-signin" id="nav-signin-btn">Sign In</a>
+            <a href="signup.html" class="btn-signup" id="nav-signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero" id="hero-section">
+      <!-- Floating Food Emoji Particles Background -->
+      <div class="hero-particles" aria-hidden="true">
+        <div class="food-particle" style="top: 14%; left: 7%; font-size: 2.8rem;">🍕</div>
+        <div class="food-particle" style="top: 22%; left: 88%; font-size: 3rem;">🍜</div>
+        <div class="food-particle" style="top: 55%; left: 5%; font-size: 2.6rem;">🍣</div>
+        <div class="food-particle" style="top: 64%; left: 91%; font-size: 3.2rem;">🌮</div>
+        <div class="food-particle" style="top: 36%; left: 16%; font-size: 2.2rem;">🍰</div>
+        <div class="food-particle" style="top: 42%; left: 82%; font-size: 2.4rem;">🥗</div>
+        <div class="food-particle" style="top: 76%; left: 20%; font-size: 2.7rem;">🍔</div>
+        <div class="food-particle" style="top: 80%; left: 78%; font-size: 2.9rem;">🍝</div>
+        <div class="food-particle" style="top: 10%; left: 45%; font-size: 2.1rem;">🥘</div>
+        <div class="food-particle" style="top: 26%; left: 30%; font-size: 2.3rem;">🍱</div>
+        <div class="food-particle" style="top: 72%; left: 50%; font-size: 2.4rem;">🥐</div>
+        <div class="food-particle" style="top: 86%; left: 10%; font-size: 2.5rem;">🧆</div>
+      </div>
+
+      <div class="hero-content">
+        <!-- Tagline Badge -->
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span class="hero-badge-text">✨ AI-Powered Recipe Discovery</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="hero-title">
+          Cook with Confidence, <em class="title-gradient">Eat with Joy</em>
+        </h1>
+
+        <!-- Subtitle Paragraph -->
+        <p class="hero-subtitle">
+          Discover hand-crafted culinary recipes from 50+ global cultures, get instant smart guidance from FoodieBot AI, and transform simple everyday ingredients into unforgettable meals.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta">
+          <a href="recipes.html" class="btn btn-primary btn-lg" id="hero-explore-btn">
+            <i class="fa-solid fa-compass"></i> Explore Recipes
+          </a>
+          <a href="signup.html" class="btn btn-outline btn-lg" id="hero-signup-btn">
+            <i class="fa-solid fa-sparkles"></i> Join CookZenix Free
+          </a>
+        </div>
+
+        <!-- Stats Strip -->
+        <div class="hero-stats" id="hero-stats-strip">
+          <div class="hero-stat-card">
+            <span class="hero-stat-icon">🍲</span>
+            <div class="hero-stat-number">500+</div>
+            <div class="hero-stat-label">Recipes</div>
+          </div>
+          <div class="hero-stat-card">
+            <span class="hero-stat-icon">🌍</span>
+            <div class="hero-stat-number">50+</div>
+            <div class="hero-stat-label">Cuisines</div>
+          </div>
+          <div class="hero-stat-card">
+            <span class="hero-stat-icon">👨‍🍳</span>
+            <div class="hero-stat-number">10K+</div>
+            <div class="hero-stat-label">Cooks</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Recipes Section -->
+    <section class="section" id="featured-recipes">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Chef's Selection</span>
+          <h2 class="section-title">Featured Recipes</h2>
+          <p class="section-subtitle">Trending culinary creations loved and rated highest by our global community.</p>
+        </div>
+
+        <!-- Recipe Grid (Populated by recipes.js) -->
+        <div id="featured-grid" class="recipes-grid">
+          <!-- Skeleton loaders or recipes inserted by JS -->
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="recipes.html" class="btn btn-primary btn-md" id="view-all-recipes-btn">
+            <i class="fa-solid fa-grid-2"></i> View All Recipes
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section section-categories" id="categories-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Flavors of the World</span>
+          <h2 class="section-title">Browse by Category</h2>
+          <p class="section-subtitle">Find your next culinary adventure by diving into popular categories.</p>
+        </div>
+
+        <!-- Category Cards Grid (8 specified categories) -->
+        <div class="recipes-grid recipes-grid-compact" id="categories-grid">
+          <!-- 1. Pasta -->
+          <a href="recipes.html?category=Pasta" class="recipe-card category-card" id="cat-card-pasta">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,107,53,0.2) 0%, rgba(255,230,109,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍝</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Pasta</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">65+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 2. Pizza -->
+          <a href="recipes.html?category=Pizza" class="recipe-card category-card" id="cat-card-pizza">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,68,68,0.2) 0%, rgba(255,107,53,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍕</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Pizza</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">48+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 3. Curry -->
+          <a href="recipes.html?category=Curry" class="recipe-card category-card" id="cat-card-curry">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,165,0,0.2) 0%, rgba(255,230,109,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍛</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Curry</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">54+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 4. Salads -->
+          <a href="recipes.html?category=Salads" class="recipe-card category-card" id="cat-card-salads">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(76,175,80,0.2) 0%, rgba(78,205,196,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🥗</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Salads</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">40+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 5. Sushi -->
+          <a href="recipes.html?category=Sushi" class="recipe-card category-card" id="cat-card-sushi">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(78,205,196,0.2) 0%, rgba(59,130,246,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍱</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Sushi</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">32+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 6. Burgers -->
+          <a href="recipes.html?category=Burgers" class="recipe-card category-card" id="cat-card-burgers">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,107,53,0.2) 0%, rgba(255,68,68,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍔</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Burgers</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">45+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 7. Desserts -->
+          <a href="recipes.html?category=Desserts" class="recipe-card category-card" id="cat-card-desserts">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,105,180,0.2) 0%, rgba(255,230,109,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍰</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Desserts</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">70+ Recipes</p>
+            </div>
+          </a>
+
+          <!-- 8. Breakfast -->
+          <a href="recipes.html?category=Breakfast" class="recipe-card category-card" id="cat-card-breakfast">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,165,0,0.2) 0%, rgba(255,230,109,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍳</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Breakfast</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">20+ Morning Dishes</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore by Cuisine Section -->
+    <section class="section section-cuisines" id="cuisines-section" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i class="fa-solid fa-globe"></i> Global Traditions</span>
+          <h2 class="section-title">Explore by Cuisine</h2>
+          <p class="section-subtitle">Take your tastebuds on a trip across continents with authentic regional culinary specialties.</p>
+        </div>
+
+        <div class="recipes-grid recipes-grid-compact" id="cuisines-grid">
+          <!-- 1. South Indian -->
+          <a href="recipes.html?cuisine=South Indian" class="recipe-card category-card" id="cuisine-card-south-indian">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(5,150,105,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🌴</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">South Indian</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">70+ Authentic Recipes</p>
+            </div>
+          </a>
+
+          <!-- 2. Indian (All) -->
+          <a href="recipes.html?cuisine=Indian" class="recipe-card category-card" id="cuisine-card-indian">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,107,53,0.2) 0%, rgba(255,140,66,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍛</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Indian</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">88+ Royal Classics</p>
+            </div>
+          </a>
+
+          <!-- 3. Italian -->
+          <a href="recipes.html?cuisine=Italian" class="recipe-card category-card" id="cuisine-card-italian">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(239,68,68,0.2) 0%, rgba(16,185,129,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍝</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Italian</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Pasta, Pizza &amp; Dolci</p>
+            </div>
+          </a>
+
+          <!-- 4. Mexican -->
+          <a href="recipes.html?cuisine=Mexican" class="recipe-card category-card" id="cuisine-card-mexican">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(245,158,11,0.2) 0%, rgba(239,68,68,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🌮</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Mexican</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Fiesta &amp; Street Tacos</p>
+            </div>
+          </a>
+
+          <!-- 5. Japanese -->
+          <a href="recipes.html?cuisine=Japanese" class="recipe-card category-card" id="cuisine-card-japanese">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(147,51,234,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍱</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">Japanese</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Sushi, Ramen &amp; Teriyaki</p>
+            </div>
+          </a>
+
+          <!-- 6. American -->
+          <a href="recipes.html?cuisine=American" class="recipe-card category-card" id="cuisine-card-american">
+            <div class="recipe-image-wrap" style="height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(239,68,68,0.2) 0%, rgba(59,130,246,0.15) 100%);">
+              <span style="font-size: 3.5rem;">🍔</span>
+            </div>
+            <div class="recipe-card-body text-center">
+              <h3 class="recipe-title" style="font-size: 1.25rem; margin-bottom: 4px;">American</h3>
+              <p class="recipe-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Burgers, BBQ &amp; Comfort</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" id="how-it-works-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Effortless Cooking</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">Three easy steps to discover and master delicious meals in your home kitchen.</p>
+        </div>
+
+        <div class="recipes-grid" id="how-it-works-grid">
+          <!-- Step 1 -->
+          <div class="step-card" id="step-card-search">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Search Recipes 🔍</h4>
+              <p>Explore thousands of dishes filtered by your favorite cuisines, diet restrictions, prep time, or whatever ingredients you have in your fridge.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card" id="step-card-cook">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Cook with AI Guidance 🤖</h4>
+              <p>Follow clear step-by-step instructions with integrated check-lists. Need an emergency ingredient swap? Ask FoodieBot anytime.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card" id="step-card-share">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Share Your Creation 📸</h4>
+              <p>Snap a photo of your culinary masterpiece, publish your unique recipes, rate other cooks' creations, and earn community acclaim.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" id="footer-logo">
+            <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+            <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+          </a>
+          <p>Cook with Confidence, Eat with Joy — Your AI-powered culinary companion bringing global flavors directly to your home kitchen.</p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="recipes.html" class="footer-link">Browse Recipes</a></li>
+            <li><a href="index.html#categories-section" class="footer-link">Categories</a></li>
+            <li><a href="add-recipe.html" class="footer-link">Add Recipe</a></li>
+          </ul>
+        </div>
+
+        <!-- Explore Cuisines -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="recipes.html?category=Pasta" class="footer-link">Italian Pasta</a></li>
+            <li><a href="recipes.html?category=Curry" class="footer-link">Spicy Curries</a></li>
+            <li><a href="recipes.html?category=Desserts" class="footer-link">Sweet Desserts</a></li>
+            <li><a href="recipes.html?category=Salads" class="footer-link">Fresh & Healthy</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Community -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="signin.html" class="footer-link">Sign In</a></li>
+            <li><a href="signup.html" class="footer-link">Join Free</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 CookZenix AI. All rights reserved. Crafted with passion for food lovers everywhere.</p>
+        <div class="footer-social-links">
+          <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FoodieBot Chatbot Widget -->
+  <div class='chatbot-widget' id='chatbot-widget'>
+    <div class='chatbot-panel' id='chatbot-panel'>
+      <div class='chatbot-header'>
+        <div class='chatbot-header-info'>
+          <span class='chatbot-avatar'>🤖</span>
+          <div>
+            <h4>FoodieBot</h4>
+            <span class='status-dot'></span><span class='status-text'>Always ready to cook!</span>
+          </div>
+        </div>
+        <button class='chatbot-close' id='chatbot-close'>✕</button>
+      </div>
+      <div class='chatbot-messages' id='chatbot-messages'>
+        <!-- Welcome message injected by JS -->
+      </div>
+      <div class='chatbot-input-area'>
+        <input type='text' id='chatbot-input' placeholder='Ask me anything about food...' />
+        <button id='chatbot-send'>➤</button>
+      </div>
+    </div>
+    <button class='chatbot-toggle' id='chatbot-toggle' title='Chat with FoodieBot'>🍴</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src='js/main.js' data-alt='../js/main.js'></script>
+  <script src='js/recipes.js'></script>
+  <script src='js/chatbot.js'></script>
+</body>
+</html>

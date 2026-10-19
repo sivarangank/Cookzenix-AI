@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe - CookZenix AI</title>
+  <meta name="description" content="Detailed recipe instructions, ingredients, nutritional values, and reviews powered by CookZenix AI.">
+  <meta name="keywords" content="recipe detail, cooking steps, ingredients list, nutrition, recipe reviews">
+  <meta name="author" content="CookZenix AI">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+
+  <!-- Google Fonts Import: Playfair Display and Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Primary Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Fallback relative reference: ../css/style.css and ../js/main.js -->
+  <link rel="alternate stylesheet" href="../css/style.css" title="alternate-css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" id="nav-logo" aria-label="CookZenix AI Homepage">
+          <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+          <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="nav-toggle" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="nav-menu">
+          <a href="index.html" class="nav-link" id="nav-home">
+            <i class="fa-solid fa-house"></i> Home
+          </a>
+          <a href="recipes.html" class="nav-link active" id="nav-recipes">
+            <i class="fa-solid fa-book-open"></i> Recipes
+          </a>
+          <a href="index.html#categories-section" class="nav-link" id="nav-categories">
+            <i class="fa-solid fa-layer-group"></i> Categories
+          </a>
+          <a href="add-recipe.html" class="nav-link" id="add-recipe-link" style="display: none;">
+            <i class="fa-solid fa-circle-plus"></i> Add Recipe
+          </a>
+
+          <!-- Auth Actions -->
+          <div class="nav-actions auth-nav" id="auth-nav">
+            <a href="signin.html" class="btn-signin" id="nav-signin-btn">Sign In</a>
+            <a href="signup.html" class="btn-signup" id="nav-signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main style="padding-top: 96px; padding-bottom: var(--space-20);">
+    <div class="container">
+      
+      <!-- Back Navigation Bar -->
+      <div style="margin-bottom: var(--space-4);">
+        <a href="recipes.html" class="footer-link" id="back-to-recipes" style="display: inline-flex; align-items: center; gap: 8px; font-weight: var(--fw-bold); font-size: var(--fs-sm);">
+          <i class="fa-solid fa-arrow-left"></i> Back to Recipes
+        </a>
+      </div>
+
+      <!-- Recipe Hero Banner (Populated by recipe-detail.js) -->
+      <section class="recipe-detail-hero" id="recipe-hero" style="min-height: 420px; position: relative;">
+        <!-- Injected dynamically by JS -->
+      </section>
+
+      <!-- Meta Strip (Prep time, cook time, servings, difficulty, cuisine, rating) -->
+      <section class="recipe-meta-strip" id="recipe-meta">
+        <!-- Injected dynamically by JS -->
+      </section>
+
+      <!-- Action Buttons Bar -->
+      <div class="recipe-actions-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-8); flex-wrap: wrap; gap: var(--space-4);">
+        <div style="display: flex; gap: var(--space-3); align-items: center;">
+          <button type="button" class="btn btn-outline btn-md" id="favorite-btn">
+            🤍 Save Recipe
+          </button>
+          <button type="button" class="btn btn-outline btn-md" id="share-btn">
+            <i class="fa-solid fa-share-nodes"></i> Share
+          </button>
+        </div>
+
+        <!-- Owner Actions (Hidden by default, shown if current user owns recipe) -->
+        <div id="owner-actions" style="display: none; gap: var(--space-3); align-items: center;">
+          <button type="button" class="btn btn-outline btn-md" id="edit-recipe-btn">
+            <i class="fa-solid fa-pen-to-square"></i> Edit Recipe
+          </button>
+          <button type="button" class="btn btn-danger btn-md" id="delete-recipe-btn" style="background: var(--error); color: #FFFFFF; border-color: var(--error);">
+            <i class="fa-solid fa-trash-can"></i> Delete Recipe
+          </button>
+        </div>
+      </div>
+
+      <!-- Two-Column Layout: Main Content + Sidebar -->
+      <div class="recipe-detail-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-10);">
+        
+        <!-- Left / Main Column: Tab System -->
+        <div class="recipe-detail-main">
+          <div class="recipe-tabs">
+            <!-- Tab Buttons -->
+            <div class="tabs-nav" role="tablist">
+              <button type="button" class="tab-btn active" id="tab-ingredients" data-tab="ingredients" role="tab" aria-selected="true">
+                <i class="fa-solid fa-basket-shopping"></i> Ingredients
+              </button>
+              <button type="button" class="tab-btn" id="tab-instructions" data-tab="instructions" role="tab" aria-selected="false">
+                <i class="fa-solid fa-list-ol"></i> Instructions
+              </button>
+              <button type="button" class="tab-btn" id="tab-nutrition" data-tab="nutrition" role="tab" aria-selected="false">
+                <i class="fa-solid fa-heart-pulse"></i> Nutrition
+              </button>
+              <button type="button" class="tab-btn" id="tab-reviews" data-tab="reviews" role="tab" aria-selected="false">
+                <i class="fa-solid fa-star"></i> Reviews
+              </button>
+            </div>
+
+            <!-- Tab Panels -->
+            <div class="tabs-content">
+              <!-- 1. Ingredients Panel -->
+              <div class="tab-panel tab-pane active" id="panel-ingredients" role="tabpanel">
+                <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-4);">Ingredients Checklist</h3>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--space-4);">Check off items as you prepare them in your kitchen.</p>
+                <ul id="ingredients-list" class="ingredients-list" style="list-style: none;">
+                  <!-- Ingredients rendered dynamically by JS -->
+                </ul>
+              </div>
+
+              <!-- 2. Instructions Panel -->
+              <div class="tab-panel tab-pane" id="panel-instructions" role="tabpanel" style="display: none;">
+                <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-4);">Cooking Steps</h3>
+                <ol id="steps-list" class="steps-list" style="list-style: none; display: flex; flex-direction: column; gap: var(--space-4);">
+                  <!-- Steps rendered dynamically by JS -->
+                </ol>
+              </div>
+
+              <!-- 3. Nutrition Panel -->
+              <div class="tab-panel tab-pane" id="panel-nutrition" role="tabpanel" style="display: none;">
+                <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-4);">Nutritional Breakdown</h3>
+                <p style="font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--space-4);">Estimated per serving values.</p>
+                <div id="nutrition-grid" class="nutrition-grid">
+                  <!-- Nutrition values rendered dynamically by JS -->
+                </div>
+              </div>
+
+              <!-- 4. Reviews Panel -->
+              <div class="tab-panel tab-pane" id="panel-reviews" role="tabpanel" style="display: none;">
+                <h3 style="font-family: var(--font-heading); margin-bottom: var(--space-4);">Cook Reviews & Comments</h3>
+                
+                <!-- Comments List -->
+                <div id="comments-list" class="comments-list" style="margin-bottom: var(--space-8);">
+                  <!-- Comments rendered dynamically by JS -->
+                </div>
+
+                <!-- Add Comment Form -->
+                <div class="add-comment-section" style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: var(--space-6);">
+                  <h4 style="font-family: var(--font-heading); margin-bottom: var(--space-4);">Leave a Review</h4>
+                  <form id="comment-form">
+                    <!-- Rating Stars (1-5) -->
+                    <div style="margin-bottom: var(--space-4);">
+                      <label style="display: block; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-secondary); margin-bottom: 6px;">Your Rating</label>
+                      <div class="rating-stars-input" style="display: inline-flex; gap: 6px; font-size: 1.6rem; cursor: pointer;">
+                        <span class="rating-star selected" data-rating="1" style="color: var(--accent);">★</span>
+                        <span class="rating-star selected" data-rating="2" style="color: var(--accent);">★</span>
+                        <span class="rating-star selected" data-rating="3" style="color: var(--accent);">★</span>
+                        <span class="rating-star selected" data-rating="4" style="color: var(--accent);">★</span>
+                        <span class="rating-star selected" data-rating="5" style="color: var(--accent);">★</span>
+                      </div>
+                    </div>
+
+                    <!-- Textarea -->
+                    <div style="margin-bottom: var(--space-4);">
+                      <label for="comment-text" style="display: block; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--text-secondary); margin-bottom: 6px;">Review Comment</label>
+                      <textarea id="comment-text" class="form-input" rows="4" placeholder="How did it turn out? Any tasty substitutions you made?" style="width: 100%; background: var(--bg-dark); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 12px; color: var(--text-primary); font-size: var(--fs-sm); outline: none;" required></textarea>
+                    </div>
+
+                    <button type="submit" id="comment-submit" class="btn btn-primary btn-md">
+                      Post Review
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right / Sidebar Column -->
+        <aside class="recipe-detail-sidebar" style="display: flex; flex-direction: column; gap: var(--space-6);">
+          
+          <!-- Recipe Author Card -->
+          <div class="sidebar-card" id="recipe-author-card" style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: var(--space-6);">
+            <h4 style="font-size: var(--fs-xs); text-transform: uppercase; color: var(--text-muted); font-weight: var(--fw-bold); margin-bottom: var(--space-3); letter-spacing: 0.05em;">Recipe Creator</h4>
+            <div id="recipe-author" style="display: flex; align-items: center; gap: var(--space-3);">
+              <!-- Author avatar & name injected by JS -->
+            </div>
+          </div>
+
+          <!-- Recipe Tags Card -->
+          <div class="sidebar-card" id="recipe-tags-card" style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: var(--space-6);">
+            <h4 style="font-size: var(--fs-xs); text-transform: uppercase; color: var(--text-muted); font-weight: var(--fw-bold); margin-bottom: var(--space-3); letter-spacing: 0.05em;">Recipe Tags</h4>
+            <div id="recipe-tags" class="tags-container" style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+              <!-- Tags injected by JS -->
+            </div>
+          </div>
+
+          <!-- Recipe Quick Nutrition Snapshot Card -->
+          <div class="sidebar-card" id="recipe-nutrition-card" style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: var(--space-6);">
+            <h4 style="font-size: var(--fs-xs); text-transform: uppercase; color: var(--text-muted); font-weight: var(--fw-bold); margin-bottom: var(--space-3); letter-spacing: 0.05em;"><i class="fa-solid fa-heart-pulse" style="color:var(--primary); margin-right:4px;"></i> Nutrition Per Serving</h4>
+            <div id="sidebar-nutrition-list" style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- Quick nutrition pills injected by JS -->
+            </div>
+          </div>
+
+          <!-- AI Cooking Assistance Card -->
+          <div class="sidebar-card" style="background: linear-gradient(135deg, rgba(255,107,53,0.12) 0%, rgba(26,26,46,0.85) 100%); border: 1.5px solid rgba(255,107,53,0.3); border-radius: var(--radius-lg); padding: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+              <span style="font-size: 1.5rem;">🤖</span>
+              <h4 style="font-family: var(--font-heading); font-size: var(--fs-md); color: var(--primary);">Need Cooking Advice?</h4>
+            </div>
+            <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: var(--lh-relaxed); margin-bottom: var(--space-4);">
+              Ask FoodieBot in the bottom corner for temperature adjustments, vegan substitutes, or wine pairing ideas!
+            </p>
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('chatbot-toggle').click();" style="width: 100%;">
+              Ask FoodieBot
+            </button>
+          </div>
+
+          <!-- Related Recipes Placeholder Widget -->
+          <div class="sidebar-card" id="related-recipes-widget" style="background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: var(--space-6);">
+            <h4 style="font-size: var(--fs-xs); text-transform: uppercase; color: var(--text-muted); font-weight: var(--fw-bold); margin-bottom: var(--space-3); letter-spacing: 0.05em;">More to Explore</h4>
+            <div id="related-recipes" style="display: flex; flex-direction: column; gap: var(--space-3);">
+              <a href="recipes.html" style="font-size: var(--fs-sm); color: var(--primary); font-weight: var(--fw-semibold);">
+                <i class="fa-solid fa-compass"></i> Discover similar recipes in this cuisine →
+              </a>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" id="footer-logo">
+            <span class="logo-icon"><i class="fa-solid fa-utensils"></i></span>
+            <span class="logo-text">CookZenix <span class="logo-ai-tag">AI</span></span>
+          </a>
+          <p>Cook with Confidence, Eat with Joy — Empowering cooks worldwide with intelligent culinary exploration.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="recipes.html" class="footer-link">Browse Recipes</a></li>
+            <li><a href="index.html#categories-section" class="footer-link">Categories</a></li>
+            <li><a href="add-recipe.html" class="footer-link">Add Recipe</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Explore Cuisines</h4>
+          <ul class="footer-links">
+            <li><a href="recipes.html?category=Pasta" class="footer-link">Italian Classics</a></li>
+            <li><a href="recipes.html?category=Curry" class="footer-link">Indian Curries</a></li>
+            <li><a href="recipes.html?category=Mexican" class="footer-link">Mexican Fiesta</a></li>
+            <li><a href="recipes.html?category=Sushi" class="footer-link">Japanese Delights</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li><a href="signin.html" class="footer-link">Sign In</a></li>
+            <li><a href="signup.html" class="footer-link">Join Free</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CookZenix AI. All rights reserved.</p>
+        <div class="footer-social-links">
+          <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="footer-social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FoodieBot Chatbot Widget -->
+  <div class='chatbot-widget' id='chatbot-widget'>
+    <div class='chatbot-panel' id='chatbot-panel'>
+      <div class='chatbot-header'>
+        <div class='chatbot-header-info'>
+          <span class='chatbot-avatar'>🤖</span>
+          <div>
+            <h4>FoodieBot</h4>
+            <span class='status-dot'></span><span class='status-text'>Always ready to cook!</span>
+          </div>
+        </div>
+        <button class='chatbot-close' id='chatbot-close'>✕</button>
+      </div>
+      <div class='chatbot-messages' id='chatbot-messages'>
+        <!-- Welcome message injected by JS -->
+      </div>
+      <div class='chatbot-input-area'>
+        <input type='text' id='chatbot-input' placeholder='Ask me anything about food...' />
+        <button id='chatbot-send'>➤</button>
+      </div>
+    </div>
+    <button class='chatbot-toggle' id='chatbot-toggle' title='Chat with FoodieBot'>🍴</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src='js/main.js' data-alt='../js/main.js'></script>
+  <script src='js/recipe-detail.js'></script>
+  <script src='js/chatbot.js'></script>
+</body>
+</html>
